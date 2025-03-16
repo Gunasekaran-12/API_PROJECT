@@ -19,24 +19,27 @@ public class User {
      private String  preferredLanguage;
      private String  ProfilePicture;
      private String  enrolledCourses;
-    public User(){
+    public User(){ //default constructor
 
     }
-    public User(long id, String name, String email, String password, String preferredLanguage, String profilePicture,
-            String enrolledCourses) {
+    
+    public User(Long id, String name, @Email(message = "Invalid email format") String email,
+            @NotBlank(message = "Description is required") String password, String preferredLanguage,
+            String profilePicture, String enrolledCourses) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.password = password;
         this.preferredLanguage = preferredLanguage;
-        this.ProfilePicture = profilePicture;
+        ProfilePicture = profilePicture;
         this.enrolledCourses = enrolledCourses;
     }
-    public long getId() {
+
+    public Long getId() {
         return id;
     }
-    public void setId(Long id2) {
-        this.id = id2;
+    public void setId(Long id) {
+        this.id = id;
     }
     public String getName() {
         return name;
