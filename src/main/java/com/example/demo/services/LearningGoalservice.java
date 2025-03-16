@@ -1,15 +1,12 @@
 package com.example.demo.services;
-
 import com.example.demo.entities.LearningGoal;
 import com.example.demo.repositories.LearningGoalRepository;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-
 import java.sql.Date;
 import java.util.List;
 import java.util.Optional;
@@ -33,9 +30,13 @@ public class LearningGoalservice{
         return repository.save(updatedGoal);
     }
 
-    public String deleteGoal(Long id) {
-        repository.deleteById(id);
-        return "Learning goal deleted successfully";
+    public boolean deleteGoal(Long id) {
+        if(repository.existsById(id)){
+            repository.deleteById(id);
+            return true;
+        }else{
+            return false;
+        }
     }
 
     public Page<LearningGoal> paginated(int page,int size){

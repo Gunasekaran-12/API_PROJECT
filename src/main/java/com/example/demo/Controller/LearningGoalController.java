@@ -3,16 +3,18 @@ import com.example.demo.entities.LearningGoal;
 import com.example.demo.services.LearningGoalservice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.sql.Date;
 import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/goals")
+@RequestMapping("/goals")
 public class LearningGoalController {
 
-    @Autowired
+    @Autowired //it helps to create Object
     private LearningGoalservice service;
 
     @PostMapping
@@ -37,9 +39,15 @@ public class LearningGoalController {
     }
 
     @DeleteMapping("/{id}")
-    public String deleteGoal(@PathVariable Long id) {
-        return service.deleteGoal(id);
+    public ResponseEntity<String> deleteGoal(@PathVariable Long id) {
+        Boolean deleted=service.deleteGoal(id);
+        if(deleted){
+            return ResponseEntity.ok("Goal "+id+" was Deleted Successfully.");
+        }else{
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Goal was not Found.");
+        }
     }
+    
     @GetMapping("/before/{date}")
     public List<LearningGoal> getGoalsBeforeDate(@PathVariable Date date) {
         return service.getGoalsBeforeDate(date);

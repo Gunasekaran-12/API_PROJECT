@@ -1,5 +1,4 @@
 package com.example.demo.entities;
-
 import jakarta.persistence.*;
 import java.util.Date;
 
@@ -8,11 +7,12 @@ public class LearningGoal {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String goalName;
     private Date targetCompletionDate;
 
-    public LearningGoal() {}
+    public LearningGoal() {
+        
+    }
 
     public LearningGoal(Long id, String goalName, Date targetCompletionDate) {
         this.id = id;
