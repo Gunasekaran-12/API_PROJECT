@@ -1,5 +1,8 @@
 package com.example.demo.entities;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -32,4 +35,7 @@ public class Language {
     public void setLanguageName(String languageName) {
         this.languageName = languageName;
     }
+
+    @OneToMany(mappedBy="language",cascade=CascadeType.ALL,orphanRemoval=true)
+    private List<Course> courses=new ArrayList<>();
 }

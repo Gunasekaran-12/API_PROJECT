@@ -1,8 +1,13 @@
 package com.example.demo.entities;
+import java.util.ArrayList;
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 
@@ -77,4 +82,11 @@ public class User {
     public void setEnrolledCourses(String enrolledCourses) {
         this.enrolledCourses = enrolledCourses;
     }
+
+    //Mapping....
+       @OneToMany(mappedBy="user",cascade=CascadeType.ALL,orphanRemoval=true)
+       private List<Enrollment> EnrolledCourses=new ArrayList<>();
+
+       @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+       private List<LearningGoal> learningGoals = new ArrayList<>();
 }

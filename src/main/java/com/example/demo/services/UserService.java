@@ -1,4 +1,5 @@
 package com.example.demo.services;
+import java.util.stream.Collectors;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -40,5 +41,12 @@ public class UserService {
     
     public User getUserByEmail(String email) {
         return rep.findByEmail(email);
+    }
+
+    //Using Map Getting Individual Attributes
+    public List<String>getAllUserByEmail(){
+        return rep.findAll().stream()
+        .map(User::getEmail)
+        .collect(Collectors.toList());
     }
 }

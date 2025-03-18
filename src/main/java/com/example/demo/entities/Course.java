@@ -1,6 +1,8 @@
 package com.example.demo.entities;
 
 import jakarta.persistence.*;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -53,5 +55,12 @@ public class Course {
     public void setDifficultyLevel(String difficultyLevel) {
         this.difficultyLevel = difficultyLevel;
     }
+
+    @OneToMany(mappedBy="course",cascade=CascadeType.ALL,orphanRemoval=true)
+    private List<Enrollment> EnrolledCourse=new ArrayList<>();
+    
+    @ManyToOne
+    @JoinColumn(name="language_id")
+    private Language language;
   
 }

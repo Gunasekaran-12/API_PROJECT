@@ -43,4 +43,8 @@ public class LearningGoal {
     public void setTargetCompletionDate(Date targetCompletionDate) {
         this.targetCompletionDate = targetCompletionDate;
     }
+
+    @ManyToOne
+    @JoinColumn(name="user_id")
+    private User user;
 }

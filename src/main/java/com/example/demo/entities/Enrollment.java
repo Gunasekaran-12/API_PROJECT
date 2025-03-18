@@ -64,4 +64,12 @@ public class Enrollment {
     public void setCourseId(Long courseId) {
         this.courseId = courseId;
     }
+
+    @ManyToOne
+    @JoinColumn(name="course_id")
+    private Course course;
+
+    @ManyToOne
+    @JoinColumn(name="user_id")
+    private User user;
 }

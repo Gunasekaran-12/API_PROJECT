@@ -6,9 +6,9 @@ import org.springframework.stereotype.Repository;
 
 import com.example.demo.entities.User;
 @Repository
-public interface UserRepository extends JpaRepository<User, Integer> {
+public interface UserRepository extends JpaRepository<User, Long> {
 
-    void deleteById(Long id);
+    void deleteById(@SuppressWarnings("null") Long id);
 
     // JPQL query to find a user by email
     @Query("SELECT u FROM User u WHERE u.email = :email")
