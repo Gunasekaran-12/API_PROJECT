@@ -24,22 +24,28 @@ public class User {
      private String  preferredLanguage;
      private String  ProfilePicture;
      private String  enrolledCourses;
+     
+     @OneToMany(mappedBy="user",cascade=CascadeType.ALL,orphanRemoval=true)
+     private List<Enrollment> EnrolledCourses=new ArrayList<>();
+ 
+     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+     private List<LearningGoal> learningGoals = new ArrayList<>();
     public User(){ //default constructor
 
     }
     
     public User(Long id, String name, @Email(message = "Invalid email format") String email,
-            @NotBlank(message = "Description is required") String password, String preferredLanguage,
-            String profilePicture, String enrolledCourses) {
+    @NotBlank(message = "Description is required") String password, String preferredLanguage,
+    String profilePicture, String enrolledCourses) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.password = password;
         this.preferredLanguage = preferredLanguage;
-        ProfilePicture = profilePicture;
+        this.ProfilePicture = profilePicture;
         this.enrolledCourses = enrolledCourses;
     }
-
+    
     public Long getId() {
         return id;
     }
@@ -79,14 +85,11 @@ public class User {
     public String getEnrolledCourses() {
         return enrolledCourses;
     }
-    public void setEnrolledCourses(String enrolledCourses) {
+    public void setEnrolledCourses(String enrolledCourses) 
+    {
         this.enrolledCourses = enrolledCourses;
     }
 
     //Mapping....
-       @OneToMany(mappedBy="user",cascade=CascadeType.ALL,orphanRemoval=true)
-       private List<Enrollment> EnrolledCourses=new ArrayList<>();
 
-       @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-       private List<LearningGoal> learningGoals = new ArrayList<>();
 }

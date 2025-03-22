@@ -6,14 +6,40 @@ import java.util.Date;
 @Entity
 public class Enrollment {
     @Id
+
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
     private int progressPercentage;
     private Date enrollmentDate;
+    //private Course course;
+    //private User user;
     
-    private Long userId;  
-    private Long courseId; 
+    @ManyToOne
+    @JoinColumn(name="course_id")
+    private Course course;
+    
+    @ManyToOne
+    @JoinColumn(name="user_id")
+    private User user;
+
+    public Course getCourse() {
+        return course;
+    }
+
+    public void setCourse(Course course) {
+        this.course = course;
+    }
+
+     
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     public Enrollment() {}
 
@@ -21,8 +47,8 @@ public class Enrollment {
         this.id = id;
         this.progressPercentage = progressPercentage;
         this.enrollmentDate = enrollmentDate;
-        this.userId = userId;
-        this.courseId = courseId;
+        this.user = user;
+        this.course = course;
     }
 
     public Long getId() {
@@ -49,27 +75,6 @@ public class Enrollment {
         this.enrollmentDate = enrollmentDate;
     }
 
-    public Long getUserId() {
-        return userId;
-    }
+  
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
-
-    public Long getCourseId() {
-        return courseId;
-    }
-
-    public void setCourseId(Long courseId) {
-        this.courseId = courseId;
-    }
-
-    @ManyToOne
-    @JoinColumn(name="course_id")
-    private Course course;
-
-    @ManyToOne
-    @JoinColumn(name="user_id")
-    private User user;
 }

@@ -14,6 +14,16 @@ public class Course {
     private String name;
     private String description;
     private String difficultyLevel;
+    
+    public String getEnrolledUsers() {
+        return enrolledUsers;
+    }
+
+    public void setEnrolledUsers(String enrolledUsers) {
+        this.enrolledUsers = enrolledUsers;
+    }
+
+    private String enrolledUsers;
 
     public Course() {}
 

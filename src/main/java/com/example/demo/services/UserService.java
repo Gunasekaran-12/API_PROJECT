@@ -18,7 +18,7 @@ public class UserService {
     {
         return rep.save(u);
     }
-    public List<User>getUser()
+    public List<User> getUser()
     {
         return rep.findAll();
     }
@@ -44,9 +44,9 @@ public class UserService {
     }
 
     //Using Map Getting Individual Attributes
-    public List<String>getAllUserByEmail(){
-        return rep.findAll().stream()
-        .map(User::getEmail)
-        .collect(Collectors.toList());
-    }
+    // public List<String>getAllUserByEmail(){
+    //     return rep.findAll().stream()
+    //     .map(User::getEmail)
+    //     .collect(Collectors.toList());
+    // }
 }

@@ -61,8 +61,8 @@ public class UserController {
       } 
 
       //map Function using..
-      @GetMapping("/mapUserEmail")
-      public List<String> getAllEmailsByMap(){
-        return service.getAllUserByEmail();
-      }
+      // @GetMapping("/mapUserEmail")
+      // public List<String> getAllEmailsByMap(){
+      //   return service.getAllUserByEmail();
+      // }
     }

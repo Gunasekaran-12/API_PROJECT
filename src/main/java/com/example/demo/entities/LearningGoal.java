@@ -9,6 +9,17 @@ public class LearningGoal {
     private Long id;
     private String goalName;
     private Date targetCompletionDate;
+    @ManyToOne
+    @JoinColumn(name="user_id")
+    private User user;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     public LearningGoal() {
         
@@ -43,8 +54,4 @@ public class LearningGoal {
     public void setTargetCompletionDate(Date targetCompletionDate) {
         this.targetCompletionDate = targetCompletionDate;
     }
-
-    @ManyToOne
-    @JoinColumn(name="user_id")
-    private User user;
 }

@@ -12,6 +12,15 @@ public class Language {
     private Long id;
 
     private String languageName;
+    private String languageDescription;
+    
+    public String getLanguageDescription() {
+        return languageDescription;
+    }
+
+    public void setLanguageDescription(String languageDescription) {
+        this.languageDescription = languageDescription;
+    }
 
     public Language() {}
 

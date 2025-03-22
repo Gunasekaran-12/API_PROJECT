@@ -10,14 +10,18 @@ import java.util.List;
 @RequestMapping("/api/enrollments")
 public class EnrollmentController {
 
+    Enrollmentservice service;
     @Autowired
-    private Enrollmentservice service;
+    EnrollmentController(Enrollmentservice es)
+    {
+        service=es;
+    }
 
     @PostMapping
     public Enrollment enrollInCourse(@RequestBody Enrollment enrollment) {
         return service.enrollInCourse(enrollment);
     }
-    @GetMapping("/user1")
+    @GetMapping
     public List<Enrollment> getEnrollmentsByUserId() {
         return service.getEnrollmentsByUserId();
     }
@@ -38,8 +42,14 @@ public class EnrollmentController {
         return service.paginated(page,size);
     }
     
-    @GetMapping("/user/{userId}")
-    public List<Enrollment> getEnrollmentsBy(@PathVariable Long userId) {
-        return service.getEnrollmentsBy(userId);
-    }
+    // @GetMapping("/user/{userId}")
+    // public List<Enrollment> getEnrollmentsBy(@PathVariable Long userId) {
+    //     return service.getEnrollmentsBy(userId);
+    // }
 }
+// @ManyToMany (cascade=CascadeType.ALL)
+// @JoinTable(
+//     name="student_course",
+//     joinColumns=@JoinColumn(name="student_id"),
+//     inverseJoinColumn=@JoinColumn(name="course_id"))
+//     Set<Course>courses=new HashSet<>();

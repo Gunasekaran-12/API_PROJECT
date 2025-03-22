@@ -15,9 +15,12 @@ import java.util.List;
 @Service
 public class Enrollmentservice {
     
+    EnrollmentRepository repository;
     @Autowired
-    private EnrollmentRepository repository;
-
+    Enrollmentservice(EnrollmentRepository er)
+    {
+        repository=er;
+    }
     public Enrollment enrollInCourse(Enrollment enrollment) {
         return repository.save(enrollment);
     }
@@ -42,7 +45,7 @@ public class Enrollmentservice {
         return repository.findAll(pageable);
     }
 
-    public List<Enrollment> getEnrollmentsBy(Long userId) {
-        return repository.findByUser(userId);
-    }
+    // public List<Enrollment> getEnrollmentsBy(Long userId) {
+    //     return repository.findByUser(userId);
+    // }
 }
