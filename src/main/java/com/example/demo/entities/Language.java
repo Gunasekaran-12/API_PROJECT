@@ -10,9 +10,12 @@ public class Language {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    
     private String languageName;
     private String languageDescription;
+    
+    @OneToMany(mappedBy="language",cascade=CascadeType.ALL,orphanRemoval=true)
+    private List<Course> courses=new ArrayList<>();
     
     public String getLanguageDescription() {
         return languageDescription;
@@ -45,6 +48,4 @@ public class Language {
         this.languageName = languageName;
     }
 
-    @OneToMany(mappedBy="language",cascade=CascadeType.ALL,orphanRemoval=true)
-    private List<Course> courses=new ArrayList<>();
 }

@@ -3,6 +3,8 @@ package com.example.demo.entities;
 import jakarta.persistence.*;
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 public class Enrollment {
     @Id
@@ -15,12 +17,13 @@ public class Enrollment {
     //private Course course;
     //private User user;
     
-    @ManyToOne
-    @JoinColumn(name="course_id")
+    @ManyToOne(cascade=CascadeType.PERSIST)
+    @JoinColumn(name="course_id",nullable=false)
     private Course course;
     
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="user_id")
+    @JsonBackReference
     private User user;
 
     public Course getCourse() {
@@ -30,8 +33,6 @@ public class Enrollment {
     public void setCourse(Course course) {
         this.course = course;
     }
-
-     
 
     public User getUser() {
         return user;
@@ -43,12 +44,12 @@ public class Enrollment {
 
     public Enrollment() {}
 
-    public Enrollment(Long id, int progressPercentage, Date enrollmentDate, Long userId, Long courseId) {
-        this.id = id;
-        this.progressPercentage = progressPercentage;
-        this.enrollmentDate = enrollmentDate;
-        this.user = user;
-        this.course = course;
+    public Enrollment(Long id, int progressPercentage, Date enrollmentDate, Long userId, Long courseId, User user, Course course) {
+         this.id = id;
+         this.progressPercentage = progressPercentage;
+         this.enrollmentDate = enrollmentDate;
+         this.user = user;
+         this.course = course;
     }
 
     public Long getId() {

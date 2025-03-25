@@ -1,20 +1,36 @@
 package com.example.demo.entities;
-
 import jakarta.persistence.*;
-
 import java.util.ArrayList;
 import java.util.List;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 
 @Entity
+
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Course {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    
-    private String name;
-    private String description;
-    private String difficultyLevel;
-    
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        private Long id;
+        
+        private String name;
+        private String description;
+        private String difficultyLevel;
+        
+        @OneToMany(mappedBy="course",cascade=CascadeType.ALL,orphanRemoval=true)
+        private List<Enrollment> EnrolledCourse=new ArrayList<>();
+        
+        @ManyToOne
+         @JoinColumn(name="language_id")
+         private Language language;
+
+        @ManyToOne
+         @JsonIgnore
+         @JsonInclude(JsonInclude.Include.NON_NULL)
+         @JoinColumn(name="user_id")
+         private User user;
+
     public String getEnrolledUsers() {
         return enrolledUsers;
     }
@@ -65,12 +81,4 @@ public class Course {
     public void setDifficultyLevel(String difficultyLevel) {
         this.difficultyLevel = difficultyLevel;
     }
-
-    @OneToMany(mappedBy="course",cascade=CascadeType.ALL,orphanRemoval=true)
-    private List<Enrollment> EnrolledCourse=new ArrayList<>();
-    
-    @ManyToOne
-    @JoinColumn(name="language_id")
-    private Language language;
-  
 }

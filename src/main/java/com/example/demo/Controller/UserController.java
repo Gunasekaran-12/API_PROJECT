@@ -1,7 +1,10 @@
 package com.example.demo.Controller;
 import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -28,6 +31,12 @@ public class UserController {
         return service.addUser(user);
       }
 
+      @GetMapping("/get/{id}")
+      public ResponseEntity<User> getUser(@PathVariable Long id) {
+        User user = service.getUserWithCourses(id);
+        return ResponseEntity.ok(user);
+      }
+      
        @GetMapping("/get")
       public List<User> getUser()
       {
@@ -53,7 +62,7 @@ public class UserController {
       }
     
        @GetMapping("/email/{email}")
-      public User getUserByEmail(@PathVariable String email) {
+      public Optional<User> getUserByEmail(@PathVariable String email) {
           return service.getUserByEmail(email);
       } 
 

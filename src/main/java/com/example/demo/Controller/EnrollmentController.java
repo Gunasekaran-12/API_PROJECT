@@ -4,7 +4,7 @@ import com.example.demo.services.Enrollmentservice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
-import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/enrollments")
@@ -22,8 +22,8 @@ public class EnrollmentController {
         return service.enrollInCourse(enrollment);
     }
     @GetMapping
-    public List<Enrollment> getEnrollmentsByUserId() {
-        return service.getEnrollmentsByUserId();
+    public Optional<Enrollment> getEnrollmentsByUserId() {
+        return service.getEnrollmentsByUserId(null);
     }
 
     @PutMapping("/{id}")
